@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore the DIY Club Gallery - featuring our best projects and more!">
+    <meta name="keywords" content="DIY, gallery, projects, crafts, community">
+    <title>Gallery - DIY Club</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Inline CSS -->
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #E6F0FA, #EDE7F6, #FCE4EC);
+            color: #333;
+            margin: 0;
+            transition: background 0.5s, color 0.5s;
+        }
+
+        body.dark-mode {
+            background: linear-gradient(135deg, #2C3E50, #34495E, #4A235A);
+            color: #fff;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #fff !important;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .dark-mode .navbar {
+            background-color: #222 !important;
+            box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-link {
+            color: #FF6F61 !important;
+            transition: color 0.3s;
+        }
+
+        .dark-mode .nav-link {
+            color: #fff !important;
+        }
+
+        .nav-link:hover {
+            color: #FFD54F !important;
+        }
+
+        .nav-link.active {
+            color: #FFD54F !important;
+            font-weight: bold;
+        }
+
+        #darkModeToggle {
+            background: none;
+            border: none;
+            color: #FF6F61;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .dark-mode #darkModeToggle {
+            color: #fff;
+        }
+
+        #darkModeToggle:hover {
+            color: #FFD54F;
+        }
+
+        /* Hero Section */
+        #hero {
+            background: url('gallery-bg.jpg') no-repeat center center/cover;
+            background-blend-mode: overlay;
+            background-color: rgba(0, 0, 0, 0.4);
+            color: #fff;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        #hero h1 {
+            color: #FFD54F;
+            font-weight: 700;
+        }
+
+        .dark-mode #hero p {
+            color: #fff;
+        }
+
+        /* Best Projects Section */
+        #best-projects {
+            padding: 100px 0;
+            background-color: #fff;
+        }
+
+        .dark-mode #best-projects {
+            background-color: #333;
+        }
+
+        #best-projects h2 {
+            color: #FF6F61;
+            font-weight: 600;
+            margin-bottom: 50px;
+        }
+
+        .dark-mode #best-projects h2 {
+            color: #fff;
+        }
+
+        .best-item {
+            position: relative;
+            margin-bottom: 40px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+        }
+
+        .best-item img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .best-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .best-item .badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #FFD54F;
+            color: #333;
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+
+        .best-item p {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .dark-mode .best-item p {
+            background: rgba(34, 34, 34, 0.9);
+            color: #fff;
+        }
+
+        /* Full Gallery Section */
+        #full-gallery {
+            padding: 100px 0;
+            background-color: #f8f9fa;
+        }
+
+        .dark-mode #full-gallery {
+            background-color: #444;
+        }
+
+        #full-gallery h2 {
+            color: #FF6F61;
+            font-weight: 600;
+            margin-bottom: 50px;
+        }
+
+        .dark-mode #full-gallery h2 {
+            color: #fff;
+        }
+
+        .nav-tabs .nav-link {
+            color: #FF6F61;
+            border: none;
+            padding: 10px 20px;
+            transition: color 0.3s;
+        }
+
+        .dark-mode .nav-tabs .nav-link {
+            color: #fff;
+        }
+
+        .nav-tabs .nav-link.active {
+            color: #FFD54F;
+            border-bottom: 3px solid #FFD54F;
+        }
+
+        .gallery-item {
+            margin-bottom: 30px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .gallery-item p {
+            text-align: center;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            margin: 0;
+        }
+
+        .dark-mode .gallery-item p {
+            background: rgba(34, 34, 34, 0.9);
+            color: #fff;
+        }
+
+        /* Modal */
+        .modal-content {
+            border-radius: 10px;
+            background: #fff;
+        }
+
+        .dark-mode .modal-content {
+            background: #333;
+        }
+
+        .modal-header, .modal-title {
+            color: #333;
+        }
+
+        .dark-mode .modal-header, .dark-mode .modal-title {
+            color: #fff;
+        }
+
+        .modal-img {
+            width: 100%;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .modal-img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Social Media Bar */
+        .social-bar {
+            position: fixed;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 0 10px 10px 0;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode .social-bar {
+            background: rgba(34, 34, 34, 0.9);
+        }
+
+        .social-bar a {
+            color: #FF6F61;
+            font-size: 1.5rem;
+            margin: 10px 0;
+            transition: transform 0.3s, color 0.3s;
+        }
+
+        .dark-mode .social-bar a {
+            color: #fff;
+        }
+
+        .social-bar a:hover {
+            transform: scale(1.2);
+            color: #FFD54F;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333 !important;
+            color: #fff;
+            padding: 20px 0;
+        }
+
+        .dark-mode footer {
+            background-color: #111 !important;
+        }
+
+        /* Scroll reveal */
+        .hidden {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Social Media Bar -->
+    <div class="social-bar">
+        <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.instagram.com/raisoni_diy?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/in/diyclub/" target="_blank"><i class="fab fa-linkedin"></i></a>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="index.html">
+            <img src="logo.png" alt="DIY Club Logo" style="height: 50px;">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home"></i> Home</a></li>                
+                <li class="nav-item"><a class="nav-link active" href="gallery.html">Gallery</a></li>
+            </ul>
+            <ul class="navbar-nav ml-3">
+                <li class="nav-item">
+                    <button id="darkModeToggle" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hidden">
+        <div class="container">
+            <h1 class="animate__animated animate__fadeInDown">DIY Club Gallery</h1>
+            <p class="mt-3 animate__animated animate__fadeInUp">Over 100+ projects showcasing our creativity!</p>
+        </div>
+    </section>
+
+    <!-- Best Projects Section -->
+    <section id="best-projects" class="py-5 hidden">
+        <div class="container">
+            <h2 class="text-center animate__animated animate__zoomIn">Our Best Projects</h2>
+            <div class="row mt-5">
+                <div class="col-md-4 best-item" data-toggle="modal" data-target="#imageModal" data-src="best1.jpg">
+                    <span class="badge">Featured</span>
+                    <img src="best1.jpg" alt="Masterpiece Table" loading="lazy">
+                    <p>Masterpiece Table - Woodworking Excellence</p>
+                </div>
+                <div class="col-md-4 best-item" data-toggle="modal" data-target="#imageModal" data-src="best2.jpg">
+                    <span class="badge">Featured</span>
+                    <img src="best2.jpg" alt="Smart Lamp" loading="lazy">
+                    <p>Smart Lamp - Electronics Innovation</p>
+                </div>
+                <div class="col-md-4 best-item" data-toggle="modal" data-target="#imageModal" data-src="best3.jpg">
+                    <span class="badge">Featured</span>
+                    <img src="best3.jpg" alt="Handwoven Rug" loading="lazy">
+                    <p>Handwoven Rug - Craft Mastery</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Full Gallery Section -->
+    <section id="full-gallery" class="py-5 hidden">
+        <div class="container">
+            <h2 class="text-center animate__animated animate__zoomIn">Explore All Projects</h2>
+            <ul class="nav nav-tabs justify-content-center mt-5" id="galleryTabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="all-tab" data-toggle="tab" href="#all" role="tab">All</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="woodworking-tab" data-toggle="tab" href="#woodworking" role="tab">Woodworking</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="electronics-tab" data-toggle="tab" href="#electronics" role="tab">Electronics</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="crafts-tab" data-toggle="tab" href="#crafts" role="tab">Crafts</a>
+                </li>
+            </ul>
+            <div class="tab-content mt-5" id="galleryTabContent">
+                <div class="tab-pane fade show active" id="all" role="tabpanel">
+                    <div class="row">
+                        <div class="col-md-4 gallery-item" data-toggle="modal" data-target="#imageModal" data-src="photo1.jpg">
+                            <img src="photo1.jpg" alt="Wooden Shelf" loading="lazy">
+                            <p>Wooden Shelf Project</p>
+                        </div>
+                        <div class="col-md-4 gallery-item" data-toggle="modal" data-target="#imageModal" data-src="photo2.jpg">
+                            <img src="photo2.jpg" alt="LED Lamp" loading="lazy">
+                            <p>DIY LED Lamp</p>
+                        </div>
+                        <div class="col-md-4 gallery-item" data-toggle="modal" data-target="#imageModal" data-src="photo3.jpg">
+                            <img src="photo3.jpg" alt="Knitted Scarf" loading="lazy">
+                            <p>Knitted Scarf</p>
+                        </div>
+                        <div class="col-md-4 gallery-item" data-toggle="modal" data-target="#imageModal" data-src="photo4.jpg">
+                            <img src="photo4.jpg" alt="Circuit Board" loading="lazy">
+                            <p>Circuit Board Art</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="woodworking" role="tabpanel">
+                    <div class="row">
+                        <div class="col-md-4 gallery-item" data-toggle="modal" data-target="#imageModal" data-src="photo1.jpg">
+                            <img src="photo1.jpg" alt="Wooden Shelf" loading="lazy">
+                            <p>Wooden Shelf Project</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="electronics" role="tabpanel">
+                    <div class="row">
+                        <div class="col-md-4 gallery-item" data-toggle="modal" data-target="#imageModal" data-src="photo2.jpg">
+                            <img src="photo2.jpg" alt="LED Lamp" loading="lazy">
+                            <p>DIY LED Lamp</p>
+                        </div>
+                        <div class="col-md-4 gallery-item" data-toggle="modal" data-target="#imageModal" data-src="photo4.jpg">
+                            <img src="photo4.jpg" alt="Circuit Board" loading="lazy">
+                            <p>Circuit Board Art</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="crafts" role="tabpanel">
+                    <div class="row">
+                        <div class="col-md-4 gallery-item" data-toggle="modal" data-target="#imageModal" data-src="photo3.jpg">
+                            <img src="photo3.jpg" alt="Knitted Scarf" loading="lazy">
+                            <p>Knitted Scarf</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imageModalLabel">Project Image</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="" class="modal-img" id="modalImage" alt="Full-size project image">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center hidden">
+        <p>© 2025 DIY Club. All rights reserved.</p>
+    </footer>
+
+    <!-- Inline JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Dynamic footer year
+        document.querySelector('footer p').textContent = `© ${new Date().getFullYear()} DIY Club. All rights reserved.`;
+
+        // Dark mode toggle
+        document.getElementById('darkModeToggle').addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            this.innerHTML = document.body.classList.contains('dark-mode') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        });
+
+        // Scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.hidden').forEach(section => observer.observe(section));
+
+        // Modal image handling
+        $('#imageModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var imgSrc = button.data('src');
+            var modal = $(this);
+            modal.find('#modalImage').attr('src', imgSrc);
+            modal.find('.modal-title').text(button.find('p').text());
+        });
+
+        // Vanilla Tilt for gallery items
+        VanillaTilt.init(document.querySelectorAll('.gallery-item, .best-item'), {
+            max: 15,
+            speed: 400,
+            glare: true,
+            'max-glare': 0.2
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Join DIY Club - a community for creators and innovators passionate about hands-on projects.">
+    <meta name="keywords" content="DIY, crafts, projects, community, events">
+    <title>DIY Club</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Inline CSS -->
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #E6F0FA, #EDE7F6, #FCE4EC);
+            color: #333;
+            margin: 0;
+            transition: background 0.5s, color 0.5s;
+        }
+
+        body.dark-mode {
+            background: linear-gradient(135deg, #2C3E50, #34495E, #4A235A);
+            color: #fff;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #fff !important;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .dark-mode .navbar {
+            background-color: #222 !important;
+            box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-link {
+            color: #FF6F61 !important;
+            transition: color 0.3s;
+        }
+
+        .dark-mode .nav-link {
+            color: #fff !important;
+        }
+
+        .nav-link:hover {
+            color: #FFD54F !important;
+        }
+
+        .nav-link.active {
+            color: #FFD54F !important;
+            font-weight: bold;
+        }
+
+        #darkModeToggle {
+            background: none;
+            border: none;
+            color: #FF6F61;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .dark-mode #darkModeToggle {
+            color: #fff;
+        }
+
+        #darkModeToggle:hover {
+            color: #FFD54F;
+        }
+
+        /* Home Section with Video Background */
+        #home {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 80px 0;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        #home::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.2); /* Overlay for readability */
+            z-index: 2;
+        }
+
+        #home video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        #home .container {
+            position: relative;
+            z-index: 3; /* Ensure text is above video and overlay */
+        }
+
+        #home h1 {
+            color: #FFD54F; /* Adjusted for better contrast on video */
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Shadow for readability */
+        }
+
+        #home p {
+            color: #fff;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .dark-mode #home p {
+            color: #fff;
+        }
+
+        .gradient-btn {
+            background: linear-gradient(45deg, #FF6F61, #FFD54F);
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.2rem;
+            border-radius: 25px;
+            color: #fff;
+            transition: box-shadow 0.3s, transform 0.2s;
+        }
+
+        .gradient-btn:hover {
+            box-shadow: 0 0 15px rgba(255, 213, 79, 0.7);
+            transform: scale(1.05);
+        }
+
+        /* About Section */
+        #about {
+            padding: 80px 0;
+            background-color: #f8f9fa;
+        }
+
+        .dark-mode #about {
+            background-color: #444;
+        }
+
+        #about h2 {
+            color: #FF6F61;
+            font-weight: 600;
+        }
+
+        .dark-mode #about h2 {
+            color: #fff;
+        }
+
+        .flip-card {
+            perspective: 1000px;
+            height: 300px;
+            margin-bottom: 30px;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .flip-card-front {
+            background: #fff;
+        }
+
+        .dark-mode .flip-card-front {
+            background: #333;
+        }
+
+        .flip-card-back {
+            background: #FF6F61;
+            color: #fff;
+            transform: rotateY(180deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .flip-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .dark-mode #about p, .dark-mode #about h5 {
+            color: #fff;
+        }
+
+        /* Social Media Bar */
+        .social-bar {
+            position: fixed;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 0 10px 10px 0;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode .social-bar {
+            background: rgba(34, 34, 34, 0.9);
+        }
+
+        .social-bar a {
+            color: #FF6F61;
+            font-size: 1.5rem;
+            margin: 10px 0;
+            transition: transform 0.3s, color 0.3s;
+        }
+
+        .dark-mode .social-bar a {
+            color: #fff;
+        }
+
+        .social-bar a:hover {
+            transform: scale(1.2);
+            color: #FFD54F;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333 !important;
+            color: #fff;
+            padding: 20px 0;
+        }
+
+        .dark-mode footer {
+            background-color: #111 !important;
+        }
+
+        /* Hidden for scroll reveal */
+        .hidden {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Social Media Bar -->
+    <div class="social-bar">
+        <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.instagram.com/raisoni_diy?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/in/diyclub/" target="_blank"><i class="fab fa-linkedin"></i></a>
+    </div>
+
+    <!-- Navbar with Dark Mode Toggle -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="index.html">
+            <img src="logo.png" alt="DIY Club Logo" style="height: 50px;">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link active" href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="Event.html">Events</a></li>
+                
+                <li class="nav-item"><a class="nav-link" href="join.html">Join Club</a></li>
+            </ul>
+            <ul class="navbar-nav ml-3">
+                <li class="nav-item">
+                    <button id="darkModeToggle" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Home Section with Background Video -->
+    <section id="home" class="text-center hidden">
+        <video autoplay muted loop playsinline>
+            <source src="main.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="container">
+            <i class="fas fa-lightbulb animate__animated animate__bounceIn" style="font-size: 3rem; color: #FF9800;"></i>
+            <h1 class="animate__animated animate__fadeInDown">Welcome to DIY Club</h1>
+            <p class="animate__animated animate__fadeInUp mt-3">Join our community of creators and innovators!</p>
+            <a href="join.html" class="gradient-btn animate__animated animate__pulse animate__infinite mt-4">Get Started</a>
+        </div>
+    </section>
+
+    <!-- About Section with 3D Flip Cards -->
+    <section id="about" class="py-5 hidden">
+        <div class="container">
+            <h2 class="text-center animate__animated animate__zoomIn">About Us</h2>
+            <p class="text-center mt-3"><strong>Unleashing creativity, one project at a time.</strong></p>
+            <div class="row mt-5">
+                <div class="col-md-6">
+                    <p>We’re the DIY Club – a passionate crew of makers who live for hands-on innovation. Our goal? To inspire, teach, and connect DIY enthusiasts worldwide.</p>
+                    <p class="mt-3"><em>“Crafting dreams into reality since 2023.”</em></p>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-6 flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <img src="Event1.png" alt="Woodworking">
+                                </div>
+                                <div class="flip-card-back">
+                                    <p>Collage Making.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <img src="ph.png" alt="Electronics">
+                                </div>
+                                <div class="flip-card-back">
+                                    <p>Video and photography.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5 text-center">
+                <div class="col-md-4">
+                    <i class="fas fa-paint-brush" style="font-size: 2rem; color: #FF6F61;"></i>
+                    <h5>Creativity</h5>
+                    <p>From vision to victory.</p>
+                </div>
+                <div class="col-md-4">
+                    <i class="fas fa-users" style="font-size: 2rem; color: #FF6F61;"></i>
+                    <h5>Community</h5>
+                    <p>Building bonds through builds.</p>
+                </div>
+                <div class="col-md-4">
+                    <i class="fas fa-book" style="font-size: 2rem; color: #FF6F61;"></i>
+                    <h5>Learning</h5>
+                    <p>Grow with every project.</p>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <a href="join.html" class="gradient-btn">Join Us Now!</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center hidden">
+        <p>© 2025 DIY Club. All rights reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Dynamic footer year
+        document.querySelector('footer p').textContent = `© ${new Date().getFullYear()} DIY Club. All rights reserved.`;
+
+        // Dark mode toggle with localStorage
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode);
+            document.getElementById('darkModeToggle').innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+
+        function initDarkMode() {
+            const darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+            if (darkModeEnabled) {
+                document.body.classList.add('dark-mode');
+                document.getElementById('darkModeToggle').innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                document.body.classList.remove('dark-mode');
+                document.getElementById('darkModeToggle').innerHTML = '<i class="fas fa-moon"></i>';
+            }
+        }
+
+        document.getElementById('darkModeToggle').addEventListener('click', toggleDarkMode);
+        document.addEventListener('DOMContentLoaded', initDarkMode);
+
+        // Scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.hidden').forEach(section => observer.observe(section));
+    </script>
+</body>
+</html>
