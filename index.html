@@ -87,7 +87,7 @@
             color: #FFD54F;
         }
 
-        /* Home Section with Video Background and Parallax */
+       
         #home {
             position: relative;
             min-height: 100vh;
@@ -105,12 +105,12 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.2); /* Overlay for readability */
+            background-color: rgba(0, 0, 0, 0.2);  
             z-index: 2;
         }
 
         #home video {
-            position: fixed; /* Parallax effect ke liye fixed */
+            position: fixed;  
             top: 0;
             left: 0;
             min-width: 100%;
@@ -157,7 +157,6 @@
             transform: scale(1.05);
         }
 
-        /* About Section with Parallax */
         #about {
             padding: 80px 0;
             background-color: #f8f9fa;
@@ -386,14 +385,14 @@
         }
 
         .event-card {
-            background-color: rgba(255, 255, 255, 0.9); /* light mode */
+            background-color: rgba(255, 255, 255, 0.9); 
             color: #000;
             border-radius: 12px;
             transition: 0.3s ease;
         }
 
         body.dark-mode .event-card {
-            background-color: rgba(0, 0, 0, 0.4); /* dark mode */
+            background-color: rgba(0, 0, 0, 0.4); 
             color: #fff;
         }
 
@@ -439,7 +438,7 @@
             }
             
             .social-bar a:hover::after {
-                content: attr(href); /* Link ka text dikhayega */
+                content: attr(href); 
                 position: absolute;
                 left: 100%;
                 top: 50%;
@@ -509,7 +508,7 @@
         </div>
     </section>
 
-    <!-- About Section with Parallax and 3D Flip Cards -->
+    <!-- About Sections -->
     <section id="about" class="py-5 hidden position-relative bg-light text-dark dark-bg-image">
         <div class="container">
             <h2 class="text-center text-dark dark:text-white" data-aos="zoom-in" data-aos-duration="1000">About Us</h2>
@@ -571,7 +570,7 @@
         </div>
     </section>
 
-    <!-- Events Section with Parallax -->
+    <!-- Events Section  -->
     <section id="events" class="py-5 position-relative text-dark dark-mode-text">
         <div class="container text-center">
             <h2 class="mb-4" data-aos="fade-down" data-aos-duration="1000">Upcoming Events</h2>
@@ -606,7 +605,7 @@
                 <!-- Event 3 -->
                 <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="700">
                     <div class="card event-card h-100">
-                        <img src="sketch.jpg" class="card-img-top" alt="Maker Meet">
+                        <img src="meetup.jpg" class="card-img-top" alt="Maker Meet">
                         <div class="card-body">
                             <h5 class="card-title">Maker’s Meetup</h5>
                             <p class="card-text">Connect with fellow creators, share ideas, and get inspired!</p>
