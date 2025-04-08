@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Export to CSV</title>
+  <style>
+    body {
+      background: #111;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 2.2rem;
+      margin-bottom: 2rem;
+      color: #00ffe1;
+      text-shadow: 0 0 10px #00ffe1, 0 0 20px #00ffe1;
+    }
+
+    #downloadCSV {
+      background: linear-gradient(135deg, #00ffe1, #0077ff);
+      color: #111;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1rem;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0, 255, 225, 0.4);
+    }
+
+    #downloadCSV:hover {
+      background: linear-gradient(135deg, #0077ff, #00ffe1);
+      transform: scale(1.08);
+      box-shadow: 0 6px 30px rgba(0, 255, 225, 0.6);
+    }
+  </style>
+</head>
+<body>
+  <h2>Export Users Data to CSV</h2>
+  <button id="downloadCSV">Download CSV</button>
+
+  <script type="module">
+    // Firebase setup
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js';
+    import { getFirestore, collection, getDocs } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js';
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDDb7OOak-gXMk_I_zgOpiOmauOvnvAK1k",
+      authDomain: "diyclubnew.firebaseapp.com",
+      projectId: "diyclubnew",
+      storageBucket: "diyclubnew.appspot.com",
+      messagingSenderId: "585131777850",
+      appId: "1:585131777850:web:25731d0f2d5698368a3a03"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    document.getElementById('downloadCSV').addEventListener('click', async () => {
+      try {
+        const snapshot = await getDocs(collection(db, 'users'));
+        let csvContent = "Name,Email,Department,Division\n";
+
+        snapshot.forEach(doc => {
+          const data = doc.data();
+          const row = [
+            data.name || '',
+            data.email || '',
+            data.department || '',
+            data.division || ''
+          ].join(",");
+          csvContent += row + "\n";
+        });
+
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'users_data.csv';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      } catch (error) {
+        console.error("CSV Download Error:", error);
+        alert("Failed to download CSV.");
+      }
+    });
+  </script>
+</body>
+</html>

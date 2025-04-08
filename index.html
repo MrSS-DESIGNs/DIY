@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Join DIY Club - a community for creators and innovators passionate about hands-on projects.">
+    <meta name="keywords" content="DIY, crafts, projects, community, events">
+    <title>DIY Club</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Inline CSS -->
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #E6F0FA, #EDE7F6, #FCE4EC);
+            color: #333;
+            margin: 0;
+            transition: background 0.5s, color 0.5s;
+        }
+
+        body.dark-mode {
+            background: linear-gradient(135deg, #2C3E50, #34495E, #4A235A);
+            color: #fff;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #fff !important;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+        .navbar.scrolled {
+            padding: 5px 0; /* Shrink on scroll */
+            background-color: rgba(255, 255, 255, 0.95) !important; /* Slightly transparent */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .dark-mode .navbar.scrolled {
+            background-color: rgba(34, 34, 34, 0.95) !important;
+        }
+        .dark-mode .navbar {
+            background-color: #222 !important;
+            box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-link {
+            color: #FF6F61 !important;
+            transition: color 0.3s;
+        }
+
+        .dark-mode .nav-link {
+            color: #fff !important;
+        }
+
+        .nav-link:hover {
+            color: #FFD54F !important;
+        }
+
+        .nav-link.active {
+            color: #FFD54F !important;
+            font-weight: bold;
+        }
+
+        #darkModeToggle {
+            background: none;
+            border: none;
+            color: #FF6F61;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .dark-mode #darkModeToggle {
+            color: #fff;
+        }
+
+        #darkModeToggle:hover {
+            color: #FFD54F;
+        }
+
+        /* Home Section with Video Background and Parallax */
+        #home {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 80px 0;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        #home::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.2); /* Overlay for readability */
+            z-index: 2;
+        }
+
+        #home video {
+            position: fixed; /* Parallax effect ke liye fixed */
+            top: 0;
+            left: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: 1;
+            transform: translateZ(0); /* Performance optimization */
+        }
+
+        #home .container {
+            position: relative;
+            z-index: 3;
+            transition: transform 0.1s ease; /* Smooth movement */
+        }
+
+        #home h1 {
+            color: #FFD54F;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        #home p {
+            color: #fff;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .dark-mode #home p {
+            color: #fff;
+        }
+
+        .gradient-btn {
+            background: linear-gradient(45deg, #FF6F61, #FFD54F);
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.2rem;
+            border-radius: 25px;
+            color: #fff;
+            transition: box-shadow 0.3s, transform 0.2s;
+        }
+
+        .gradient-btn:hover {
+            box-shadow: 0 0 15px rgba(255, 213, 79, 0.7);
+            transform: scale(1.05);
+        }
+
+        /* About Section with Parallax */
+        #about {
+            padding: 80px 0;
+            background-color: #f8f9fa;
+            position: relative;
+            background-image: url('about-parallax.jpg');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+        }
+
+        #about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3); /* Overlay for readability */
+            z-index: 0;
+        }
+
+        #about .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .dark-mode #about {
+            background-color: #444;
+        }
+
+        #about h2 {
+            color: #FF6F61;
+            font-weight: 600;
+        }
+
+        .dark-mode #about h2 {
+            color: #fff;
+        }
+
+        .flip-card {
+            perspective: 1000px;
+            height: 300px;
+            margin-bottom: 30px;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .flip-card-front {
+            background: #fff;
+        }
+
+        .dark-mode .flip-card-front {
+            background: #333;
+        }
+
+        .flip-card-back {
+            background: #FF6F61;
+            color: #fff;
+            transform: rotateY(180deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .flip-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .dark-mode #about p, .dark-mode #about h5 {
+            color: #fff;
+        }
+
+        /* Events Section with Parallax */
+        #events {
+            padding: 80px 0;
+            position: relative;
+            background-image: url('parallax-bg.jpg');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+        }
+
+        #events::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4); /* Overlay for readability */
+            z-index: 0;
+        }
+
+        #events .container {
+            position: relative;
+            z-index: 1;
+        }
+        .event-card:hover {
+            transform: scale(1.05) rotate(1deg); /* Slight tilt */
+            box-shadow: 0 10px 25px rgba(255, 111, 97, 0.5); /* Glow effect */
+        }
+        
+        .flip-card-inner:hover {
+            box-shadow: 0 0 20px rgba(255, 213, 79, 0.7); /* Glow on flip */
+        }
+        #home::before {
+            animation: pulseOverlay 3s infinite ease-in-out;
+        }
+        
+        @keyframes pulseOverlay {
+            0%, 100% { background-color: rgba(0, 0, 0, 0.2); }
+            50% { background-color: rgba(0, 0, 0, 0.4); }
+        }
+        /* Social Media Bar */
+        .social-bar {
+            position: fixed;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 0 10px 10px 0;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode .social-bar {
+            background: rgba(34, 34, 34, 0.9);
+        }
+
+        .social-bar a {
+            color: #FF6F61;
+            font-size: 1.5rem;
+            margin: 10px 0;
+            transition: transform 0.3s, color 0.3s;
+        }
+
+        .dark-mode .social-bar a {
+            color: #fff;
+        }
+
+        .social-bar a:hover {
+            transform: scale(1.2);
+            color: #FFD54F;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333 !important;
+            color: #fff;
+            padding: 20px 0;
+        }
+
+        .dark-mode footer {
+            background-color: #111 !important;
+        }
+
+        /* Hidden for scroll reveal */
+        .hidden {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .event-card {
+            transition: transform 0.4s ease, box-shadow 0.3s ease;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .event-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
+        }
+
+        #events h2, #events p {
+            color: #fff;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.6);
+        }
+
+        /* Light mode default */
+        #events {
+            color: #000;
+        }
+
+        /* Dark mode support */
+        body.dark-mode #events,
+        body.dark-mode #events h2,
+        body.dark-mode #events p,
+        body.dark-mode .card-title,
+        body.dark-mode .card-text {
+            color: #fff !important;
+            background-color: transparent;
+        }
+
+        .event-card {
+            background-color: rgba(255, 255, 255, 0.9); /* light mode */
+            color: #000;
+            border-radius: 12px;
+            transition: 0.3s ease;
+        }
+
+        body.dark-mode .event-card {
+            background-color: rgba(0, 0, 0, 0.4); /* dark mode */
+            color: #fff;
+        }
+
+        .gradient-btn {
+            background: linear-gradient(45deg, #FF9800, #FF5722);
+            color: #fff;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: 0.3s ease;
+        }
+
+        .gradient-btn:hover {
+            filter: brightness(1.1);
+        }
+        #preloader {
+            transition: opacity 0.5s ease;
+        }
+        
+        #preloader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        body {
+        cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M10 4V16M4 10H16" stroke="%23FF6F61" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>') 10 10, auto;
+        }
+        a, button, .flip-card, .gradient-btn, .event-card {
+      cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"><circle cx="15" cy="15" r="12" fill="none" stroke="%23FFD54F" stroke-width="3"/></svg>') 15 15, pointer;
+        }
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 5px;
+            background: #FF6F61;
+            z-index: 1001;
+            transition: width 0.3s ease;}
+            .social-bar a {
+                position: relative;
+            }
+            
+            .social-bar a:hover::after {
+                content: attr(href); /* Link ka text dikhayega */
+                position: absolute;
+                left: 100%;
+                top: 50%;
+                transform: translateY(-50%);
+                background: #FF6F61;
+                color: #fff;
+                padding: 5px 10px;
+                border-radius: 3px;
+                font-size: 0.9rem;
+                white-space: nowrap;
+                margin-left: 10px;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+            
+            .social-bar a:hover::after {
+                opacity: 1;
+            }
+    </style>
+</head>
+<body>
+    <div id="preloader" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 9999; display: flex; align-items: center; justify-content: center;">
+        <i class="fas fa-spinner fa-spin" style="font-size: 3rem; color: #FF6F61;"></i>
+    </div>
+    <div id="progress-bar"></div>
+    <!-- Social Media Bar -->
+    <div class="social-bar">
+        <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.instagram.com/raisoni_diy?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/in/diyclub/" target="_blank"><i class="fab fa-linkedin"></i></a>
+    </div>
+
+    <!-- Navbar with Dark Mode Toggle -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="index.html">
+            <img src="logo.jpg" alt="DIY Club Logo" style="height: 50px;">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link active" href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="Event.html">Events</a></li>
+                <li class="nav-item"><a class="nav-link" href="Gallery.html">Gallery</a></li>
+                <li class="nav-item"><a class="nav-link" href="join.html">Join Club</a></li>
+            </ul>
+            <ul class="navbar-nav ml-3">
+                <li class="nav-item">
+                    <button id="darkModeToggle" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Home Section with Background Video -->
+    <section id="home" class="text-center hidden">
+        <video autoplay muted loop playsinline>
+            <source src="main.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="container">
+            <i class="fas fa-lightbulb animate__animated animate__bounceIn" style="font-size: 3rem; color: #FF9800;"></i>
+            <h1 class="animate__animated animate__fadeInDown">Welcome to DIY Club</h1>
+            <p class="animate__animated animate__fadeInUp mt-3">Join our community of creators and innovators!</p>
+            <a href="join.html" class="gradient-btn animate__animated animate__pulse animate__infinite mt-4">Get Started</a>
+        </div>
+    </section>
+
+    <!-- About Section with Parallax and 3D Flip Cards -->
+    <section id="about" class="py-5 hidden position-relative bg-light text-dark dark-bg-image">
+        <div class="container">
+            <h2 class="text-center text-dark dark:text-white" data-aos="zoom-in" data-aos-duration="1000">About Us</h2>
+            <p class="text-center mt-3" data-aos="fade-up" data-aos-delay="200"><strong>Unleashing creativity, one project at a time.</strong></p>
+            <div class="row mt-5">
+                <div class="col-md-6" data-aos="fade-right" data-aos-delay="300">
+                    <p>We’re the DIY Club – a passionate crew of makers who live for hands-on innovation. Our goal? To inspire, teach, and connect DIY enthusiasts worldwide.</p>
+                    <p class="mt-3"><em>“Crafting dreams into reality since 2023.”</em></p>
+                </div>
+                <div class="col-md-6" data-aos="fade-left" data-aos-delay="400">
+                    <div class="row">
+                        <div class="col-md-6 flip-card mb-4">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <img src="Event1.png" alt="Woodworking">
+                                </div>
+                                <div class="flip-card-back">
+                                    <p>Collage Making.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 flip-card mb-4">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <img src="ph.png" alt="Electronics">
+                                </div>
+                                <div class="flip-card-back">
+                                    <p>Video and photography.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Core Values -->
+            <div class="row mt-5 text-center">
+                <div class="col-md-4" data-aos="flip-left" data-aos-delay="300">
+                    <i class="fas fa-paint-brush" style="font-size: 2rem; color: #FF6F61;"></i>
+                    <h5>Creativity</h5>
+                    <p>From vision to victory.</p>
+                </div>
+                <div class="col-md-4" data-aos="flip-left" data-aos-delay="500">
+                    <i class="fas fa-users" style="font-size: 2rem; color: #FF6F61;"></i>
+                    <h5>Community</h5>
+                    <p>Building bonds through builds.</p>
+                </div>
+                <div class="col-md-4" data-aos="flip-left" data-aos-delay="700">
+                    <i class="fas fa-book" style="font-size: 2rem; color: #FF6F61;"></i>
+                    <h5>Learning</h5>
+                    <p>Grow with every project.</p>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="text-center mt-5" data-aos="fade-up" data-aos-delay="800">
+                <a href="join.html" class="gradient-btn">Join Us Now!</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section with Parallax -->
+    <section id="events" class="py-5 position-relative text-dark dark-mode-text">
+        <div class="container text-center">
+            <h2 class="mb-4" data-aos="fade-down" data-aos-duration="1000">Upcoming Events</h2>
+            <p class="mb-5" data-aos="fade-up" data-aos-delay="200">Explore our exciting workshops and creative challenges!</p>
+            <div class="row">
+                <!-- Event 1 -->
+                <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="card event-card h-100">
+                        <img src="robot.jpg" class="card-img-top" alt="Workshop">
+                        <div class="card-body">
+                            <h5 class="card-title">DIY Robot Workshop</h5>
+                            <p class="card-text">Build your own bot using simple household materials and microcontrollers!</p>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <a href="Event.html" class="btn gradient-btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Event 2 -->
+                <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="500">
+                    <div class="card event-card h-100">
+                        <img src="eco.jpg" class="card-img-top" alt="Craft Fest">
+                        <div class="card-body">
+                            <h5 class="card-title">Eco Craft Fest</h5>
+                            <p class="card-text">Compete to make the most innovative eco-friendly DIY crafts!</p>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <a href="Event.html" class="btn gradient-btn">Register Now</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Event 3 -->
+                <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="700">
+                    <div class="card event-card h-100">
+                        <img src="sketch.jpg" class="card-img-top" alt="Maker Meet">
+                        <div class="card-body">
+                            <h5 class="card-title">Maker’s Meetup</h5>
+                            <p class="card-text">Connect with fellow creators, share ideas, and get inspired!</p>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <a href="Event.html" class="btn gradient-btn">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center hidden">
+        <p>© 2025 DIY Club. All rights reserved.</p>
+    </footer>
+
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+
+    <!-- Scripts -->
+     
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        window.addEventListener('scroll', function() {
+            let scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (window.scrollY / scrollHeight) * 100;
+            document.getElementById('progress-bar').style.width = scrolled + '%';
+        });
+        window.addEventListener('load', function() {
+            document.getElementById('preloader').classList.add('hidden');
+            setTimeout(() => document.getElementById('preloader').remove(), 500);
+        });
+      
+        document.querySelector('footer p').textContent = `© ${new Date().getFullYear()} DIY Club. All rights reserved.`;
+
+        // Dark mode toggle with localStorage
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode);
+            document.getElementById('darkModeToggle').innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+
+        function initDarkMode() {
+            const darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+            if (darkModeEnabled) {
+                document.body.classList.add('dark-mode');
+                document.getElementById('darkModeToggle').innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                document.body.classList.remove('dark-mode');
+                document.getElementById('darkModeToggle').innerHTML = '<i class="fas fa-moon"></i>';
+            }
+        }
+
+        document.getElementById('darkModeToggle').addEventListener('click', toggleDarkMode);
+        document.addEventListener('DOMContentLoaded', initDarkMode);
+
+        // Scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.hidden').forEach(section => observer.observe(section));
+
+        // Parallax effect
+        window.addEventListener('scroll', function() {
+            let scroll = window.scrollY;
+
+            // Home section video parallax (content moves over fixed video)
+            document.querySelector('#home .container').style.transform = `translateY(${scroll * 0.2}px)`;
+
+            // About section parallax
+            document.querySelector('#about').style.backgroundPositionY = `${scroll * 0.5}px`;
+
+            // Events section parallax
+            document.querySelector('#events').style.backgroundPositionY = `${scroll * 0.3}px`;
+        });
+    </script>
+</body>
+</html>

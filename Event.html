@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Discover upcoming and past events at DIY Club - join us for workshops, showcases, and more!">
+  <meta name="keywords" content="DIY, events, workshops, community, crafts">
+  <title>Events - DIY Club</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #E6F0FA, #EDE7F6, #FCE4EC);
+            color: #333;
+            margin: 0;
+            transition: background 0.5s, color 0.5s;
+        }
+
+        body.dark-mode {
+            background: linear-gradient(135deg, #2C3E50, #34495E, #4A235A);
+            color: #fff;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #fff !important;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .dark-mode .navbar {
+            background-color: #222 !important;
+            box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-link {
+            color: #FF6F61 !important;
+            transition: color 0.3s;
+        }
+
+        .dark-mode .nav-link {
+            color: #fff !important;
+        }
+
+        .nav-link:hover {
+            color: #FFD54F !important;
+        }
+
+        .nav-link.active {
+            color: #FFD54F !important;
+            font-weight: bold;
+        }
+
+        #darkModeToggle {
+            background: none;
+            border: none;
+            color: #FF6F61;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .dark-mode #darkModeToggle {
+            color: #fff;
+        }
+
+        #darkModeToggle:hover {
+            color: #FFD54F;
+        }
+
+        .parallax-hero {
+            background-image: url('https://images.unsplash.com/photo-1557682224-5b8590cd9ec5'); /* Replace with your desired image */
+            min-height: 100vh;
+            background-attachment: fixed; /* Fixed background */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .parallax-hero::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.5); /* semi-transparent dark overlay */
+            z-index: 0;
+        }
+        
+        .parallax-hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        #hero h1 {
+            color: #FFD54F;
+            font-weight: 700;
+        }
+
+        #countdown {
+            font-size: 2rem;
+            margin-top: 20px;
+            color: #fff;
+        }
+
+        .dark-mode #hero p, .dark-mode #countdown {
+            color: #fff;
+        }
+
+        /* Upcoming Events */
+        #upcoming {
+            padding: 80px 0;
+            background-color: #f8f9fa;
+        }
+
+        .dark-mode #upcoming {
+            background-color: #444;
+        }
+
+        #upcoming h2 {
+            color: #FF6F61;
+            font-weight: 600;
+            margin-bottom: 50px;
+        }
+
+        .dark-mode #upcoming h2 {
+            color: #fff;
+        }
+
+        .event-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .dark-mode .event-card {
+            background: #333;
+        }
+
+        .event-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(255, 111, 97, 0.3); /* Glow effect */
+        }
+
+        .event-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .event-card h5 {
+            color: #FF6F61;
+            margin-top: 15px;
+        }
+
+        .dark-mode .event-card h5 {
+            color: #fff;
+        }
+
+        .event-card p {
+            color: #666;
+        }
+
+        .dark-mode .event-card p {
+            color: #ddd;
+        }
+
+        .btn-register {
+            background: #FF6F61;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: background 0.3s;
+        }
+
+        .btn-register:hover {
+            background: #FFD54F;
+            color: #333;
+        }
+
+        /* Past Events */
+        #past {
+            padding: 80px 0;
+            background-color: #fff;
+        }
+
+        .dark-mode #past {
+            background-color: #333;
+        }
+
+        #past h2 {
+            color: #FF6F61;
+            font-weight: 600;
+            margin-bottom: 50px;
+        }
+
+        .dark-mode #past h2 {
+            color: #fff;
+        }
+
+        .carousel-inner img {
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .carousel-caption {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+        }
+
+        .dark-mode .carousel-caption {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Social Media Bar */
+        .social-bar {
+            position: fixed;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 0 10px 10px 0;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode .social-bar {
+            background: rgba(34, 34, 34, 0.9);
+        }
+
+        .social-bar a {
+            color: #FF6F61;
+            font-size: 1.5rem;
+            margin: 10px 0;
+            transition: transform 0.3s, color 0.3s;
+            position: relative;
+        }
+
+        .dark-mode .social-bar a {
+            color: #fff;
+        }
+
+        .social-bar a:hover {
+            transform: scale(1.2);
+            color: #FFD54F;
+        }
+
+        .social-bar a:hover::after {
+            content: attr(href);
+            position: absolute;
+            left: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #FF6F61;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            margin-left: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .social-bar a:hover::after {
+            opacity: 1;
+        }
+
+        /* CTA Banner */
+        #cta-banner {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #FF6F61;
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transition: background 0.3s;
+        }
+
+        #cta-banner:hover {
+            background: #FFD54F;
+            color: #333;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333 !important;
+            color: #fff;
+            padding: 20px 0;
+        }
+
+        .dark-mode footer {
+            background-color: #111 !important;
+        }
+
+        /* Scroll reveal */
+        .hidden {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        } 
+        .parallax-section {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .parallax-bg {
+            background-image: url('hero1.jpg'); /* ✅ Replace with your image */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Fixed background */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120%;
+            z-index: -1;
+        }
+        
+        .parallax-section .content {
+            position: relative;
+            z-index: 1;
+            padding-top: 20vh;
+        }
+
+        body {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M10 4V16M4 10H16" stroke="%23FF6F61" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>') 10 10, auto;
+        }
+        a, button, .flip-card, .gradient-btn, .event-card {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"><circle cx="15" cy="15" r="12" fill="none" stroke="%23FFD54F" stroke-width="3"/></svg>') 15 15, pointer;
+        }
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 5px;
+            background: #FF6F61;
+            z-index: 1001;
+            transition: width 0.3s ease;
+        }
+        #preloader {
+            transition: opacity 0.5s ease;
+        }
+        
+        #preloader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        #countdown {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .carousel-control-prev-icon, .carousel-control-next-icon {
+            background-color: #FF6F61;
+            border-radius: 50%;
+        }
+        .navbar.scrolled {
+            padding: 5px 0;
+          }
+          .navbar.scrolled img {
+            height: 40px;
+            transition: height 0.3s;
+          }
+          .carousel-inner img:hover {
+            transform: scale(1.1);
+            transition: transform 0.5s;
+          }
+  </style>
+</head>
+<body>
+    <div id="preloader" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 9999; display: flex; align-items: center; justify-content: center;">
+        <i class="fas fa-spinner fa-spin" style="font-size: 3rem; color: #FF6F61;"></i>
+    </div>
+    <div id="progress-bar"></div>
+  <!-- Social Media Bar -->
+    <div class="social-bar">
+        <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.instagram.com/raisoni_diy?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/in/diyclub/" target="_blank"><i class="fab fa-linkedin"></i></a>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="index.html">
+            <img src="logo.jpg" alt="DIY Club Logo" style="height: 50px;">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li class="nav-item"><a class="nav-link active" href="Event.html">Events</a></li>
+            </ul>
+            <ul class="navbar-nav ml-3">
+                <li class="nav-item">
+                    <button id="darkModeToggle" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="hero" class="hidden parallax-section">
+        <div class="parallax-bg" data-speed="0.5"></div> <!-- Fixed background -->
+        <div class="container text-center text-white content">
+          <h1 class="animate__animated animate__fadeInDown">DIY Club Events</h1>
+          <p class="mt-3 animate__animated animate__fadeInUp">Join us for workshops, showcases, and more!</p>
+          <div id="countdown" class="animate__animated animate__zoomIn">
+            Next Event in: <span id="timer"></span>
+          </div>
+        </div>
+      </section>
+      
+  <!-- Upcoming Events -->
+<section id="upcoming" class="py-5 hidden parallax-section">
+    <div class="container">
+      <h2 class="text-center parallax-item" data-speed="0.3">Upcoming Events</h2>
+      <div class="row mt-5">
+        <div class="col-md-4">
+          <div class="event-card parallax-item" data-speed="0.2">
+            <img src="Event1.png" alt="Collage Making" loading="lazy">
+            <h5>Collage Making</h5>
+            <p><strong>Date:</strong> April 15, 2025<br>Learn to craft a wooden shelf with expert guidance.</p>
+            <a href="join.html" class="btn btn-register">Register Now</a>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="event-card parallax-item" data-speed="0.4">
+            <img src="event3.png" alt="Shef Clash" loading="lazy">
+            <h5>Shef Clash</h5>
+            <p><strong>Date:</strong> April 15, 2025<br>Learn to craft a wooden shelf with expert guidance.</p>
+            <a href="join.html" class="btn btn-register">Register Now</a>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="event-card parallax-item" data-speed="0.6">
+            <img src="event4.png" alt="Bouquet fusion" loading="lazy">
+            <h5>Bouquet fusion</h5>
+            <p><strong>Date:</strong> April 15, 2025<br>Learn to craft a wooden shelf with expert guidance.</p>
+            <a href="join.html" class="btn btn-register">Register Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- Past Events -->
+    <section id="past" class="py-5 hidden">
+        <div class="container">
+            <h2 class="text-center animate__animated animate__zoomIn">Past Event Highlights</h2>
+            <div id="pastCarousel" class="carousel slide mt-5" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="college.jpg" class="d-block w-100" alt="DIY Expo 2024" loading="lazy">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Collage Making</h5>
+                            <p>A massive showcase of member projects!</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="shef.jpg" class="d-block w-100" alt="Circuit Workshop" loading="lazy">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Shef Clash</h5>
+                            <p>Hands-on Food.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="flower.jpg" class="d-block w-100" alt="Circuit Workshop" loading="lazy">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Bouquet fusion </h5>
+                            <p>Hands-on learning flowers.</p>
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#pastCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#pastCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Banner -->
+    <div id="cta-banner">
+        <a href="join.html" style="color: inherit; text-decoration: none;">Join DIY Club Now!</a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center hidden">
+        <p>© 2025 DIY Club. All rights reserved.</p>
+    </footer>
+
+  <!-- JS Scripts -->
+  <script>
+    // Parallax (Fixed background)
+    document.addEventListener("scroll", function () {
+      const parallax = document.querySelector(".parallax-bg");
+      if (parallax) {
+        // No movement, just fixed
+      }
+    });
+
+    // Countdown Timer
+    const countdown = document.getElementById("countdown");
+    const eventDate = new Date("2025-05-01T10:00:00").getTime(); // Set your event date/time here
+
+    const timer = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = eventDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdown.innerHTML = `⏳ ${days}d ${hours}h ${minutes}m ${seconds}s left`;
+
+      if (distance < 0) {
+        clearInterval(timer);
+        countdown.innerHTML = "🎉 Event has started!";
+      }
+    }, 1000);
+
+    // Dark Mode Toggle
+    const darkToggle = document.getElementById('darkModeToggle');
+    darkToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+    });
+
+    // Scroll Reveal
+    const hiddenSections = document.querySelectorAll('.hidden');
+    window.addEventListener('scroll', () => {
+      hiddenSections.forEach((section) => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+          section.classList.add('visible');
+        }
+      });
+    });
+
+    // Progress Bar
+    window.addEventListener('scroll', function() {
+        let scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        let scrolled = (window.scrollY / scrollHeight) * 100;
+        document.getElementById('progress-bar').style.width = scrolled + '%';
+    });
+
+    // Preloader
+    window.addEventListener('load', function() {
+        let preloader = document.getElementById('preloader');
+        preloader.classList.add('hidden');
+        setTimeout(() => preloader.remove(), 500); // 0.5s ke baad pura remove ho jayega
+    });
+    window.addEventListener('scroll', function() {
+        let banner = document.getElementById('cta-banner');
+        if (window.scrollY > 100) {
+            banner.style.opacity = '0.9';
+        } else {
+            banner.style.opacity = '0';
+        }
+    });
+    window.addEventListener('scroll', function() {
+        let navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      });
+      $(document).ready(function() {
+        $('#pastCarousel').carousel({
+          interval: 3000 // 3 seconds auto-slide
+        });
+      });
+  </script>
+
+  <!-- Bootstrap Scripts -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

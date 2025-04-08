@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Join DIY Club - become part of a creative community of makers and innovators!">
+    <meta name="keywords" content="DIY, join, membership, community, crafts">
+    <title>Join Club - DIY Club</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #E6F0FA, #EDE7F6, #FCE4EC);
+            color: #333;
+            margin: 0;
+            transition: background 0.5s, color 0.5s;
+        }
+
+        body.dark-mode {
+            background: linear-gradient(135deg, #2C3E50, #34495E, #4A235A);
+            color: #fff;
+        }
+
+        .navbar {
+            background-color: #fff !important;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .dark-mode .navbar {
+            background-color: #222 !important;
+            box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-link {
+            color: #FF6F61 !important;
+            transition: color 0.3s;
+        }
+
+        .dark-mode .nav-link {
+            color: #fff !important;
+        }
+
+        .nav-link:hover {
+            color: #FFD54F !important;
+        }
+
+        .nav-link.active {
+            color: #FFD54F !important;
+            font-weight: bold;
+        }
+
+        #darkModeToggle {
+            background: none;
+            border: none;
+            color: #FF6F61;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .dark-mode #darkModeToggle {
+            color: #fff;
+        }
+
+        #darkModeToggle:hover {
+            color: #FFD54F;
+        }
+
+        #hero {
+            background: url('join-bg.jpg') no-repeat center center/cover;
+            background-blend-mode: overlay;
+            background-color: rgba(0, 0, 0, 0.4);
+            color: #fff;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        #hero h1 {
+            color: #FFD54F;
+            font-weight: 700;
+        }
+
+        .dark-mode #hero p {
+            color: #fff;
+        }
+
+        .gradient-btn {
+            background: linear-gradient(45deg, #FF6F61, #FFD54F);
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.2rem;
+            border-radius: 25px;
+            color: #fff;
+            transition: box-shadow 0.3s, transform 0.2s;
+        }
+
+        .gradient-btn:hover {
+            box-shadow: 0 0 15px rgba(255, 213, 79, 0.7);
+            transform: scale(1.05);
+            color: #fff;
+        }
+
+        #benefits {
+            padding: 80px 0;
+            background-color: #f8f9fa;
+        }
+
+        .dark-mode #benefits {
+            background-color: #444;
+        }
+
+        #benefits h2 {
+            color: #FF6F61;
+            font-weight: 600;
+            margin-bottom: 50px;
+        }
+
+        .dark-mode #benefits h2 {
+            color: #fff;
+        }
+
+        .benefit-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .dark-mode .benefit-card {
+            background: #333;
+        }
+
+        .benefit-card:hover {
+            transform: scale(1.05);
+        }
+
+        .benefit-card i {
+            font-size: 2.5rem;
+            color: #FF6F61;
+            margin-bottom: 15px;
+        }
+
+        .benefit-card h5 {
+            color: #FF6F61;
+        }
+
+        .dark-mode .benefit-card h5 {
+            color: #fff;
+        }
+
+        .benefit-card p {
+            color: #666;
+        }
+
+        .dark-mode .benefit-card p {
+            color: #ddd;
+        }
+
+        #join-form {
+            padding: 80px 0;
+            background-color: #fff;
+        }
+
+        .dark-mode #join-form {
+            background-color: #333;
+        }
+
+        #join-form h2 {
+            color: #FF6F61;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        .dark-mode #join-form h2 {
+            color: #fff;
+        }
+
+        .form-control {
+            border-radius: 10px;
+            transition: border-color 0.3s;
+        }
+
+        .dark-mode .form-control {
+            background: #444;
+            color: #fff;
+            border-color: #666;
+        }
+
+        .form-control:focus {
+            border-color: #FF6F61;
+            box-shadow: 0 0 5px rgba(255, 111, 97, 0.5);
+        }
+
+        .success-message {
+            display: none;
+            color: #28a745;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+            transition: opacity 0.5s;
+        }
+
+        .dark-mode .success-message {
+            color: #90ee90;
+        }
+
+        #testimonials {
+            padding: 80px 0;
+            background-color: #f8f9fa;
+        }
+
+        .dark-mode #testimonials {
+            background-color: #444;
+        }
+
+        #testimonials h2 {
+            color: #FF6F61;
+            font-weight: 600;
+            margin-bottom: 50px;
+        }
+
+        .dark-mode #testimonials h2 {
+            color: #fff;
+        }
+
+        .carousel-inner .carousel-item p {
+            font-style: italic;
+            color: #666;
+        }
+
+        .dark-mode .carousel-inner .carousel-item p {
+            color: #ddd;
+        }
+
+        .carousel-inner .carousel-item h5 {
+            color: #FF6F61;
+        }
+
+        .dark-mode .carousel-inner .carousel-item h5 {
+            color: #fff;
+        }
+
+        .social-bar {
+            position: fixed;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 0 10px 10px 0;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode .social-bar {
+            background: rgba(34, 34, 34, 0.9);
+        }
+
+        .social-bar a {
+            color: #FF6F61;
+            font-size: 1.5rem;
+            margin: 10px 0;
+            transition: transform 0.3s, color 0.3s;
+        }
+
+        .dark-mode .social-bar a {
+            color: #fff;
+        }
+
+        .social-bar a:hover {
+            transform: scale(1.2);
+            color: #FFD54F;
+        }
+
+        #sticky-cta {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        footer {
+            background-color: #333 !important;
+            color: #fff;
+            padding: 20px 0;
+        }
+
+        .dark-mode footer {
+            background-color: #111 !important;
+        }
+
+        .hidden {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        body {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M10 4V16M4 10H16" stroke="%23FF6F61" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>') 10 10, auto;
+            }
+            a, button, .flip-card, .gradient-btn, .event-card {
+          cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"><circle cx="15" cy="15" r="12" fill="none" stroke="%23FFD54F" stroke-width="3"/></svg>') 15 15, pointer;
+        }
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 5px;
+            background: #FF6F61;
+            z-index: 1001;
+            transition: width 0.3s ease;}
+            .social-bar a {
+                position: relative;
+            }
+            #preloader {
+                transition: opacity 0.5s ease;
+            }
+            
+            #preloader.hidden {
+                opacity: 0;
+                pointer-events: none;
+            }
+    </style>
+</head>
+<body>
+    <div id="preloader" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 9999; display: flex; align-items: center; justify-content: center;">
+        <i class="fas fa-spinner fa-spin" style="font-size: 3rem; color: #FF6F61;"></i>
+    </div>
+    <div id="progress-bar"></div>
+    <div class="social-bar">
+        <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="index.html">
+            <img src="logo.jpg" alt="DIY Club Logo" style="height: 50px;">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li class="nav-item"><a class="nav-link active" href="join.html">Join Club</a></li>
+            </ul>
+            <ul class="navbar-nav ml-3">
+                <li class="nav-item">
+                    <button id="darkModeToggle" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="hero" class="hidden">
+        <div class="container">
+            <h1 class="animate__animated animate__fadeInDown">Become a DIY Club Member</h1>
+            <p class="mt-3 animate__animated animate__fadeInUp">Join a vibrant community of creators and unlock exclusive benefits!</p>
+            <a href="#join-form" class="gradient-btn animate__animated animate__pulse animate__infinite mt-4">Join Now</a>
+        </div>
+    </section>
+
+    <section id="benefits" class="py-5 hidden">
+        <div class="container">
+            <h2 class="text-center animate__animated animate__zoomIn">Why Join Us?</h2>
+            <div class="row mt-5">
+                <div class="col-md-4">
+                    <div class="benefit-card">
+                        <i class="fas fa-tools"></i>
+                        <h5>Exclusive Workshops</h5>
+                        <p>Access hands-on sessions with expert makers.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="benefit-card">
+                        <i class="fas fa-users"></i>
+                        <h5>Community</h5>
+                        <p>Connect with passionate DIY enthusiasts.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="benefit-card">
+                        <i class="fas fa-book"></i>
+                        <h5>Resources</h5>
+                        <p>Get tutorials, tools, and project ideas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="join-form" class="py-5 hidden">
+        <div class="container">
+            <h2 class="text-center animate__animated animate__zoomIn">Sign Up Today</h2>
+            <form class="mt-5 col-md-6 mx-auto" id="joinForm">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="name" placeholder="Full Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" id="email" placeholder="Email Address" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="departmentInput" class="form-control mb-2" placeholder="Enter Department" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="divisionInput" class="form-control mb-2" placeholder="Enter Division" required>
+                </div>
+                <button type="submit" class="gradient-btn btn-block">Submit</button>
+            </form>
+            <div id="successMessage" class="success-message">Successfully Sent! Welcome to DIY Club!</div>
+        </div>
+    </section>
+    
+
+    <section id="testimonials" class="py-5 hidden">
+        <div class="container">
+            <h2 class="text-center animate__animated animate__zoomIn">What Members Say</h2>
+            <div id="testimonialCarousel" class="carousel slide mt-5" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active text-center">
+                        <p>"DIY Club transformed my hobby into a passion with amazing workshops!"</p>
+                        <h5>- Alex M.</h5>
+                    </div>
+                    <div class="carousel-item text-center">
+                        <p>"The community here is so inspiring—I’ve learned so much!"</p>
+                        <h5>- Sarah K.</h5>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#testimonialCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#testimonialCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div id="sticky-cta">
+        <a href="#join-form" class="gradient-btn">Join Now</a>
+    </div>
+
+    <footer class="text-center hidden">
+        <p>© 2025 DIY Club. All rights reserved.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js"></script>
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js';
+        import { getFirestore, collection, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js';
+    
+        let db;
+        try {
+            const firebaseConfig = {
+                apiKey: "AIzaSyDDb7OOak-gXMk_I_zgOpiOmauOvnvAK1k",
+                authDomain: "diyclubnew.firebaseapp.com",
+                projectId: "diyclubnew",
+                storageBucket: "diyclubnew.firebasestorage.app",
+                messagingSenderId: "585131777850",
+                appId: "1:585131777850:web:25731d0f2d5698368a3a03"
+            };
+            const app = initializeApp(firebaseConfig);
+            db = getFirestore(app);
+            console.log("Firebase initialized successfully");
+        } catch (error) {
+            console.error("Firebase initialization failed:", error);
+            alert("Firebase setup failed. Check console.");
+        }
+    
+        // Form submission
+        document.getElementById('joinForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+    
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const department = document.getElementById('departmentInput').value.trim();
+            const division = document.getElementById('divisionInput').value.trim();
+    
+            if (name && email && department && division) {
+                if (db) {
+                    try {
+                        await addDoc(collection(db, 'users'), {
+                            name,
+                            email,
+                            department,
+                            division,
+                            timestamp: serverTimestamp()
+                        });
+                        console.log("Data saved to Firestore");
+    
+                        const successMsg = document.getElementById('successMessage');
+                        successMsg.style.display = 'block';
+                        setTimeout(() => { successMsg.style.display = 'none'; }, 3000);
+                        e.target.reset();
+                    } catch (error) {
+                        console.error("Error saving data:", error);
+                        alert("Failed to save data.");
+                    }
+                } else {
+                    alert("Firebase not initialized.");
+                }
+            } else {
+                alert("Please fill all fields.");
+            }
+        });
+    </script>
+    
+    <script>
+        
+        // Initialize Firebase (replace with your config)
+        
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Dynamic footer year
+        document.querySelector('footer p').textContent = `© ${new Date().getFullYear()} DIY Club. All rights reserved.`;
+
+        // Dark mode toggle with localStorage
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode);
+            document.getElementById('darkModeToggle').innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+
+        function initDarkMode() {
+            const darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+            if (darkModeEnabled) {
+                document.body.classList.add('dark-mode');
+                document.getElementById('darkModeToggle').innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                document.body.classList.remove('dark-mode');
+                document.getElementById('darkModeToggle').innerHTML = '<i class="fas fa-moon"></i>';
+            }
+        }
+
+        document.getElementById('darkModeToggle').addEventListener('click', toggleDarkMode);
+        document.addEventListener('DOMContentLoaded', initDarkMode);
+
+        // Scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.hidden').forEach(section => observer.observe(section));
+
+        // Form submission with Firebase
+        document.getElementById('joinForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const department = document.getElementById('department').value;
+            const division = document.getElementById('division').value;
+
+            if (name && email && department && division) {
+                if (db) {
+                    db.collection('users').add({
+                        name: name,
+                        email: email,
+                        department: department,
+                        division: division,
+                        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                    })
+                    .then(() => {
+                        const successMsg = document.getElementById('successMessage');
+                        successMsg.style.display = 'block';
+                        setTimeout(() => { successMsg.style.display = 'none'; }, 3000);
+                        this.reset();
+                    })
+                    .catch((error) => {
+                        console.error('Error adding document:', error);
+                        alert('Failed to save data. Please try again.');
+                    });
+                } else {
+                    alert('Firebase is not initialized. Please check your configuration.');
+                }
+            } else {
+                alert('Please fill out all required fields.');
+            }
+        });
+        window.addEventListener('scroll', function() {
+            let scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (window.scrollY / scrollHeight) * 100;
+            document.getElementById('progress-bar').style.width = scrolled + '%';
+        });
+        window.addEventListener('load', function() {
+            let preloader = document.getElementById('preloader');
+            preloader.classList.add('hidden');
+            setTimeout(() => preloader.remove(), 500); // 0.5s ke baad pura remove ho jayega
+        });
+    </script>
+</body>
+</html>
