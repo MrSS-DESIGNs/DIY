@@ -637,7 +637,7 @@
     
         // Check current status
         if (now < liveEventStart) {
-            liveButton.textContent = 'Live Starts Soon';
+            liveButton.textContent = 'Live Now!';
             liveButton.classList.add('disabled');
         } else if (now >= liveEventStart && now <= liveEventEnd) {
             liveButton.textContent = 'Live Now!';
@@ -668,24 +668,7 @@
     const countdown = document.getElementById("countdown");
 const eventDate = new Date("2025-04-09T11:00:00-07:00").getTime();  
 
-const timer = setInterval(() => {
-    const now = new Date().getTime();
-    const distance = eventDate - now;
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    if (distance > 0) {
-        countdown.innerHTML = `⏳ ${days}d ${hours}h ${minutes}m ${seconds}s left`;
-    } else if (distance <= 0 && distance > -3600000) { // Within 1 hour after start
-        countdown.innerHTML = "🎉 Event has started! Join now!";
-    } else {
-        countdown.innerHTML = "🎉 Event has ended!";
-        clearInterval(timer);
-    }
-}, 1000);
+countdown.innerHTML = "🎉 Event has started! Join now!";
 
     // Dark Mode Toggle
     const darkToggle = document.getElementById('darkModeToggle');
