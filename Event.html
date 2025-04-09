@@ -397,6 +397,57 @@
             transform: scale(1.1);
             transition: transform 0.5s;
           }
+          #live-event {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #E6F0FA, #FCE4EC);
+        }
+        
+        .dark-mode #live-event {
+            background: linear-gradient(135deg, #2C3E50, #4A235A);
+        }
+        
+        #live-event {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #E6F0FA, #FCE4EC);
+        }
+        
+        .dark-mode #live-event {
+            background: linear-gradient(135deg, #2C3E50, #4A235A);
+        }
+        
+        #live-event .card {
+            border: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        #live-event .card:hover {
+            transform: scale(1.05);
+        }
+        
+        #live-event .btn-danger {
+            background-color: #FF0000; /* Red for urgency */
+            border: none;
+            padding: 12px 25px;
+            font-weight: bold;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .dark-mode #live-event .btn-danger {
+            background-color: #FF3333; /* Adjusted for dark mode */
+        }
+        
+        .live-now-btn.disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            animation: none;
+        }
   </style>
 </head>
 <body>
@@ -442,7 +493,50 @@
           </div>
         </div>
       </section>
-      
+      <!-- Live Event Section - Mega Fest -->
+<section id="live-event" class="py-5 hidden" style="background-color: #f8f9fa;">
+    <div class="container">
+        <h2 class="text-center animate__animated animate__zoomIn" style="color: #FF6F61;">Live Events</h2>
+        <p class="text-center mt-3">Join our live sessions in real-time!</p>
+        <div class="row mt-5 justify-content-center">
+            <div class="col-md-8">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Mega Fest - Live Now!</h5>
+                        <p class="card-text">Experience the ultimate DIY Workshop extravaganza!</p>
+                        <p class="card-text"><strong>Date:</strong> April 9, 2025, 10:00 AM PDT</p>
+                        <p class="card-text"><strong>Duration:</strong> 1 Hour</p>
+                        <!-- Image Carousel for Mega Fest -->
+                        <div id="megaFestCarousel" class="carousel slide mt-3" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="mega.png" class="d-block w-100" alt="Mega Fest Event 1" style="height: 300px; object-fit: cover;" loading="lazy">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="mega.png" class="d-block w-100" alt="Mega Fest Event 2" style="height: 300px; object-fit: cover;" loading="lazy">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="mega.png" class="d-block w-100" alt="Mega Fest Event 3" style="height: 300px; object-fit: cover;" loading="lazy">
+                                </div>
+                            </div>
+                            <a class="carousel-control-prev" href="#megaFestCarousel" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#megaFestCarousel" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                        <!-- Live Now Button with Urgency -->
+                        <a href="https://www.youtube.com/watch?v=example-live" target="_blank" class="btn btn-danger mt-3 live-now-btn" id="liveNowButton">Live Now!</a>
+                        <!-- Replace with actual live stream URL -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
   <!-- Upcoming Events -->
 <section id="upcoming" class="py-5 hidden parallax-section">
     <div class="container">
@@ -453,7 +547,7 @@
             <img src="Event1.png" alt="Collage Making" loading="lazy">
             <h5>Collage Making</h5>
             <p><strong>Date:</strong> April 15, 2025<br>Learn to craft a wooden shelf with expert guidance.</p>
-            <a href="join.html" class="btn btn-register">Register Now</a>
+            <a href="reg.html" class="btn btn-register">Register Now</a>
           </div>
         </div>
         <div class="col-md-4">
@@ -461,7 +555,7 @@
             <img src="event3.png" alt="Shef Clash" loading="lazy">
             <h5>Shef Clash</h5>
             <p><strong>Date:</strong> April 15, 2025<br>Learn to craft a wooden shelf with expert guidance.</p>
-            <a href="join.html" class="btn btn-register">Register Now</a>
+            <a href="reg.html" class="btn btn-register">Register Now</a>
           </div>
         </div>
         <div class="col-md-4">
@@ -469,7 +563,7 @@
             <img src="event4.png" alt="Bouquet fusion" loading="lazy">
             <h5>Bouquet fusion</h5>
             <p><strong>Date:</strong> April 15, 2025<br>Learn to craft a wooden shelf with expert guidance.</p>
-            <a href="join.html" class="btn btn-register">Register Now</a>
+            <a href="reg.html" class="btn btn-register">Register Now</a>
           </div>
         </div>
       </div>
@@ -535,27 +629,63 @@
         // No movement, just fixed
       }
     });
-
+    document.addEventListener('DOMContentLoaded', function() {
+        const liveEventStart = new Date("2025-04-09T18:00:00").getTime(); // Start: 6:00 PM PDT
+        const liveEventEnd = new Date("2025-04-09T19:00:00").getTime();   // End: 7:00 PM PDT
+        const now = new Date().getTime();
+        const liveButton = document.getElementById('liveNowButton');
+    
+        // Check current status
+        if (now < liveEventStart) {
+            liveButton.textContent = 'Live Starts Soon';
+            liveButton.classList.add('disabled');
+        } else if (now >= liveEventStart && now <= liveEventEnd) {
+            liveButton.textContent = 'Live Now!';
+            liveButton.classList.remove('disabled');
+        } else {
+            liveButton.textContent = 'Event Ended';
+            liveButton.classList.add('disabled');
+            liveButton.removeAttribute('href'); // Remove link after event ends
+        }
+    
+        // Update every minute to reflect status
+        setInterval(() => {
+            const currentTime = new Date().getTime();
+            if (currentTime < liveEventStart) {
+                liveButton.textContent = 'Live Starts Soon';
+                liveButton.classList.add('disabled');
+            } else if (currentTime >= liveEventStart && currentTime <= liveEventEnd) {
+                liveButton.textContent = 'Live Now!';
+                liveButton.classList.remove('disabled');
+            } else {
+                liveButton.textContent = 'Event Ended';
+                liveButton.classList.add('disabled');
+                liveButton.removeAttribute('href');
+            }
+        }, 60000); // Check every minute
+    });
     // Countdown Timer
     const countdown = document.getElementById("countdown");
-    const eventDate = new Date("2025-05-01T10:00:00").getTime(); // Set your event date/time here
+const eventDate = new Date("2025-04-09T11:00:00-07:00").getTime();  
 
-    const timer = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = eventDate - now;
+const timer = setInterval(() => {
+    const now = new Date().getTime();
+    const distance = eventDate - now;
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      countdown.innerHTML = `⏳ ${days}d ${hours}h ${minutes}m ${seconds}s left`;
-
-      if (distance < 0) {
+    if (distance > 0) {
+        countdown.innerHTML = `⏳ ${days}d ${hours}h ${minutes}m ${seconds}s left`;
+    } else if (distance <= 0 && distance > -3600000) { // Within 1 hour after start
+        countdown.innerHTML = "🎉 Event has started! Join now!";
+    } else {
+        countdown.innerHTML = "🎉 Event has ended!";
         clearInterval(timer);
-        countdown.innerHTML = "🎉 Event has started!";
-      }
-    }, 1000);
+    }
+}, 1000);
 
     // Dark Mode Toggle
     const darkToggle = document.getElementById('darkModeToggle');
